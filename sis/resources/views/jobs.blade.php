@@ -19,6 +19,7 @@
 
                     <div class="panel-body">
 
+                        @include('layouts.listajobs')
 
                     </div>
                 </div>

@@ -20,7 +20,10 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/jobs', 'JobController@index');
-Route::post('/jobs', 'JobController@post');
+Route::group(['prefix'=>'jobs'], function () {
+    Route::get('/', 'JobController@index');
+    Route::post('/', 'JobController@post');
+    Route::get('/{id}', 'JobController@detalhes');
+});
 
 
