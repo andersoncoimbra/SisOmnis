@@ -26,6 +26,8 @@ Route::group(['prefix'=>'jobs'], function () {
     Route::get('/{id}', 'JobController@detalhes');
     Route::get('/{id}/sp','JobController@solicitapessoal');
     Route::post('/{id}/sp','JobController@postsolicitapessoal');
+    Route::get('/{id}/sp/{evg}','JobController@extras');
+
 
 });
 

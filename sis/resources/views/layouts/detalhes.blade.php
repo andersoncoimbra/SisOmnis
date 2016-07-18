@@ -32,7 +32,17 @@
                                 <dd>{{$ds[$job->status]}}</dd>
                             </dl>
                         </div>
-                        <div class="col-md-4 "></div>
+                        <div class="col-md-4 ">
+                            <p>Vagas do Job</p>
+                            <table class="table">
+                                <tr><th>Qtd </th><th>Cargo</th><th>Custo</th></tr>
+                            @forelse($vj as $v)
+                                <tr><td>{{$v->quantidade}}</td><td>{{$dp[$v->cargo]}}</td><td>{{$v->custo}}</td></tr>
+                                @empty
+                                <tr><td>Sem cargos adicionados</td></tr>
+                            @endforelse
+                            </table>
+                        </div>
                         <div class="col-md-4 clearfix"></div>
 
                         <div class="col-md-12 clearfix">
