@@ -68,8 +68,9 @@ class JobController extends Controller
         
         $vj = VagasJob::all()->where('id_job', $id);
 
-        //dd();
-        return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
+       // dd($vj);
+     return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
+
     }
 
     public function solicitapessoal($idjob)
@@ -125,6 +126,14 @@ class JobController extends Controller
         {
             return view('errors.erro');
         }
+    }
+    
+    public function orcamento($id)
+    {
+       $job = Job::find($id);
+        $p = $this->parceiro;
+        $pc = $this->praca;
+        return view('layouts.orcamento', ['id'=>$id, "job"=>$job, 'p'=>$p, 'pc'=>$pc]);
     }
 
     protected function gravar($nomejob, $parceiro, $praca, $codnome, $codnome, $codmail, $nf, $codtele, $inicio, $fim, $status, $valor, $custo)

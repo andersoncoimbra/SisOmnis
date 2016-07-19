@@ -35,28 +35,28 @@
                         <div class="col-md-4 ">
                             <p>Vagas do Job</p>
                             <table class="table">
-                                <tr><th>Qtd </th><th>Cargo</th><th>Custo</th></tr>
-                            @forelse($vj as $v)
-                                <tr><td>{{$v->quantidade}}</td><td>{{$dp[$v->cargo]}}</td><td>{{$v->custo}}</td></tr>
+                                <tr><th>Qtd</th><th>Cargo</th><th>Custo</th></tr>
+                                @forelse($vj as $v)
+                                    <tr><td>{{$v->quantidade}}</td><td>{{$dp[$v->cargo]}}</td><td>{{$v->custo}}</td></tr>
                                 @empty
-                                <tr><td>Sem cargos adicionados</td></tr>
-                            @endforelse
+                                    <tr><td>Sem cargos adicionados</td></tr>
+                                @endforelse
                             </table>
                         </div>
                         <div class="col-md-4 clearfix"></div>
 
                         <div class="col-md-12 clearfix">
                             <button class="btn btn-danger ">Editar</button>
-                           <a href="{{url()->current()}}/sp"> <button class="btn btn-default ">Solicitações de pessoal</button>
-                            <button class="btn btn-info ">Solicitações</button>
-                            <button class="btn btn-success ">Editar detalhes</button>
-                            <button class="btn btn-warning ">Gerar Orçamento</button>
-                            <button class="btn btn-primary ">Conta</button>
+                            <a href="{{url()->current()}}/sp"> <button class="btn btn-default ">Solicitações de pessoal</button></a>
+                                <button class="btn btn-info ">Solicitações</button>
+                                <button class="btn btn-success ">Editar detalhes</button>
+                            <a href="{{url()->current()}}/o"><button class="btn btn-warning ">Gerar Orçamento</button></a>
+                                <button class="btn btn-primary ">Conta</button>
                         </div>
 
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 @endsection

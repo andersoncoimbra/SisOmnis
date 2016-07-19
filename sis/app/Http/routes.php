@@ -23,10 +23,14 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix'=>'jobs'], function () {
     Route::get('/', 'JobController@index');
     Route::post('/', 'JobController@post');
+    //Detalhes Job
     Route::get('/{id}', 'JobController@detalhesjob');
+    //Detalhes e adição de extras de vaga
     Route::get('/{id}/sp','JobController@solicitapessoal');
     Route::post('/{id}/sp','JobController@postsolicitapessoal');
     Route::get('/{id}/sp/{evg}','JobController@detalhesVaga');
+    //Gera orçamento
+    Route::get('/{id}/o','JobController@orcamento');
 });
 
 
