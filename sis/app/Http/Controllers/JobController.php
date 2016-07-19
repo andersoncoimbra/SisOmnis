@@ -51,7 +51,9 @@ class JobController extends Controller
             $request->codetele,
             $request->inicio,
             $request->fim,
-            $request->status
+            $request->status,
+            $request->valor,
+            $request->custo
             );
         $jobs = Job::all();
 
@@ -125,7 +127,7 @@ class JobController extends Controller
         }
     }
 
-    protected function gravar($nomejob, $parceiro, $praca, $codnome, $codnome, $codmail, $nf, $codtele, $inicio, $fim, $status)
+    protected function gravar($nomejob, $parceiro, $praca, $codnome, $codnome, $codmail, $nf, $codtele, $inicio, $fim, $status, $valor, $custo)
     {
         $job = new Job();
         
@@ -139,6 +141,8 @@ class JobController extends Controller
         $job->inicio = $inicio;
         $job->fim = $fim;
         $job->status = $status;
+        $job->valor = $valor;
+        $job->custo = $custo;
 
         $job->save();
     }

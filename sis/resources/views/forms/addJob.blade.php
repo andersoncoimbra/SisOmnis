@@ -75,6 +75,18 @@
         </div>
     </div>
 
+    <div class="form-group">
+        {!! Form::label('valor', 'Valor global R$:', array('class' => 'col-sm-2 control-label')) !!}
+        <div class="col-sm-4">
+            <input name="valor"  class="form-control" type="number" placeholder="9999,99">
+        </div>
+
+        {!! Form::label('custo', 'Custo Previsto R$:', array('class' => 'col-sm-2 control-label')) !!}
+        <div class="col-sm-4">
+            <input name="custo" class="form-control"  type="number" placeholder="999,99">
+        </div>
+    </div>
+
 
     <div class="form-group">
         {!! Form::label('praca', 'Status', array('class' => 'col-sm-2 control-label')) !!}
