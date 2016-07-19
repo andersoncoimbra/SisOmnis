@@ -58,7 +58,7 @@ class JobController extends Controller
         return view('jobs', compact('jobs'));
     }
     
-    public function detalhes($id)
+    public function detalhesjob($id)
     {
         $dp = $this->cargo;
         $ds = $this->status;
@@ -67,7 +67,7 @@ class JobController extends Controller
         $vj = VagasJob::all()->where('id_job', $id);
 
         //dd();
-        return view('layouts.detalhes', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
+        return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
     }
 
     public function solicitapessoal($idjob)
@@ -105,19 +105,24 @@ class JobController extends Controller
         return redirect('/jobs/'.$idjob);
     }
 
-    public function extras($id, $idvj){
+    public function detalhesVaga($id, $idvj){
         $vj = VagasJob::find($idvj);
-        $job = Job::find($id);
-        $evj = ExtrasVagasJob::all()->where('id_vaga_job', $idvj);
-        $r = $this->regime;
-        $ct = $this->contratante;
-        $dp = $this->cargo;
-        $p  = $this->praca;
-        $per = $this->periodo;
-        $tipo = $this->tipoajuda;
-
-
-        return view('layouts.extras', ['id'=>$id, 'job'=>$job, 'vj'=> $vj, 'dp'=>$dp, 'p'=>$p, 'r'=>$r, 'ct'=>$ct, 'per'=>$per, 'evj'=>$evj, 'tipo'=>$tipo]);
+        if($vj->id_job == $id)
+        {
+            $job = Job::find($id);
+            $evj = ExtrasVagasJob::all()->where('id_vaga_job', $idvj);
+            $r = $this->regime;
+            $ct = $this->contratante;
+            $dp = $this->cargo;
+            $p = $this->praca;
+            $per = $this->periodo;
+            $tipo = $this->tipoajuda;
+            return view('layouts.detalhesvaga', ['id' => $id, 'job' => $job, 'vj' => $vj, 'dp' => $dp, 'p' => $p, 'r' => $r, 'ct' => $ct, 'per' => $per, 'evj' => $evj, 'tipo' => $tipo]);
+        }
+        else
+        {
+            return view('errors.erro');
+        }
     }
 
     protected function gravar($nomejob, $parceiro, $praca, $codnome, $codnome, $codmail, $nf, $codtele, $inicio, $fim, $status)
