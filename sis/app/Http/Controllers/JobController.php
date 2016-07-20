@@ -57,7 +57,7 @@ class JobController extends Controller
             );
         $jobs = Job::all();
 
-        return view('jobs', compact('jobs'));
+        return redirect('/jobs/');
     }
     
     public function detalhesjob($id)
@@ -133,7 +133,11 @@ class JobController extends Controller
        $job = Job::find($id);
         $p = $this->parceiro;
         $pc = $this->praca;
-        return view('layouts.orcamento', ['id'=>$id, "job"=>$job, 'p'=>$p, 'pc'=>$pc]);
+        $dp = $this->cargo;
+       // $vj = VagasJob::all()->where('id_job', $id)->sum('valor');
+        $vj = VagasJob::all()->where('id_job', $id);
+
+        return view('layouts.orcamento', ['id'=>$id, "job"=>$job, 'p'=>$p, 'pc'=>$pc, 'vj'=>$vj, 'dp'=>$dp]);
     }
 
     protected function gravar($nomejob, $parceiro, $praca, $codnome, $codnome, $codmail, $nf, $codtele, $inicio, $fim, $status, $valor, $custo)
