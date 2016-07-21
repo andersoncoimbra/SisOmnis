@@ -110,6 +110,7 @@ class JobController extends Controller
 
     public function detalhesVaga($id, $idvj){
         $vj = VagasJob::find($idvj);
+        if($vj != null){
         if($vj->id_job == $id)
         {
             $job = Job::find($id);
@@ -125,7 +126,46 @@ class JobController extends Controller
         else
         {
             return view('errors.erro');
+
         }
+        }
+        else
+        {
+            return view('errors.erro');
+        }
+    }
+    
+    public function postExtraVaga(Request $request, $id, $idvj)
+    {
+        $vj = VagasJob::find($idvj);
+        if($vj != null)
+        {
+            if($vj->id_job == $id)
+            {
+                //dd($request);
+                $evj = new ExtrasVagasJob();
+                $evj->tipo = $request->tipo;
+                $evj->quantidade = $request->qtd;
+                $evj->periodo = $request->per;
+                $evj->valor = $request->var;
+                $evj->custo = $request->custo;
+                $evj->id_vaga_job = $idvj;
+                $evj->save();
+
+                $param = ['id'=>$id,'evg'=>$idvj];
+
+                return redirect()->route('get.extras',$param);
+            }
+            else
+            {
+                return view('errors.erro');
+            }
+        }
+        else
+        {
+         //  return view('errors.erro');
+        }
+        
     }
     
     public function orcamento($id)

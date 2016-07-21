@@ -28,7 +28,9 @@ Route::group(['prefix'=>'jobs'], function () {
     //Detalhes e adição de extras de vaga
     Route::get('/{id}/sp','JobController@solicitapessoal');
     Route::post('/{id}/sp','JobController@postsolicitapessoal');
-    Route::get('/{id}/sp/{evg}','JobController@detalhesVaga');
+    Route::get('/{id}/sp/{evg}',['as'=>'get.extras','uses'=>'JobController@detalhesVaga']);
+    Route::post('/{id}/sp/{evg}',['uses'=>'JobController@postExtraVaga']);
+
     //Gera orçamento
     Route::get('/{id}/o','JobController@orcamento');
 });
