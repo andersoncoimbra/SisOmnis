@@ -21,8 +21,6 @@ class JobController extends Controller
     private $periodo = ['', 'Diario', 'Mensal','Unico'];
     private $tipoajuda = ['','Ajuda de custo', 'Pacote de dados', 'Vale transporte'];
 
-
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -68,8 +66,11 @@ class JobController extends Controller
         
         $vj = VagasJob::all()->where('id_job', $id);
 
-       // dd($vj);
-     return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
+        $job = Job::find($id);
+
+       $vagas= $job->vagaJobs;
+        
+     return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj, 'vagas'=>$vagas]);
 
     }
 

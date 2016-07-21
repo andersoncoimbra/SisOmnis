@@ -57,8 +57,10 @@
                         </div>
                         <div class="col-md-4 clearfix">
                             <p class="bg-success" style="padding: 10px; text-align: right">Valor global: <strong>R$ {{$job->valor}}</strong></p>
-                            @if($custototal > $job->valor)
+                        @if($custototal > $job->valor)
                                 <p class="bg-danger" style="padding: 10px; text-align: right">Atenção prejuizo em <strong>R$ {{$custototal-$job->valor }}</strong></p>
+                            @else
+                                <p class="bg-info" style="padding: 10px; text-align: right">Saldo: <strong>R$ {{$job->valor-$custototal}}</strong></p>
                             @endif
                         </div>
 
@@ -69,6 +71,9 @@
                             <button class="btn btn-success ">Informaçoes do Job</button>
                             <a href="{{url()->current()}}/o"><button class="btn btn-warning ">Gerar Orçamento</button></a>
                             <button class="btn btn-primary ">Conta</button>
+                        </div>
+                        <div>
+                            {{$vagas}}
                         </div>
 
                     </div>

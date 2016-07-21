@@ -23,7 +23,6 @@ class CreateJobsTable extends Migration
             $table->boolean('nf');
             $table->dateTime('inicio');
             $table->dateTime('fim');
-            
             $table->interger('status')->unsigned();
             $table->timestamps();
         });
