@@ -33,6 +33,7 @@ class JobController extends Controller
         $dp     = $this->parceiro;
         $p      = $this->praca;
 
+
         return view('jobs', ['jobs'=> $jobs, 'ds'=> $ds, 'dp'=>$dp, 'p'=>$p]);
     }
 
@@ -63,21 +64,23 @@ class JobController extends Controller
         $dp = $this->cargo;
         $ds = $this->status;
         $p  = $this->praca;
+        $tipo   = $this->tipoajuda;
         
-        $vj = VagasJob::all()->where('id_job', $id);
+        //$vagas = VagasJob::all();
 
         $job = Job::find($id);
 
-       $vagas= $job->vagaJobs;
+       $vj= $job->vagaJobs;
         
-     return view('layouts.detalhesjob', ['job' => Job::find($id), 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj, 'vagas'=>$vagas]);
+     return view('layouts.detalhesjob', ['job' => Job::find($id), 'tipo'=>$tipo, 'dp'=> $dp, 'ds'=>$ds, 'p'=>$p, 'vj' => $vj]);
 
     }
 
     public function solicitapessoal($idjob)
     {
-        $nomejob = Job::find($idjob)->nomeJob;
-        $vj = VagasJob::all()->where('id_job', $idjob);
+        $job = Job::find($idjob);
+        $nomejob = $job->nomeJob;
+        $vj = $job->vagajobs;
         $c  = $this->cargo;
         $r = $this->regime;
         $ct = $this->contratante;
@@ -115,7 +118,7 @@ class JobController extends Controller
         if($vj->id_job == $id)
         {
             $job = Job::find($id);
-            $evj = ExtrasVagasJob::all()->where('id_vaga_job', $idvj);
+            $evj = $vj->extras;
             $r = $this->regime;
             $ct = $this->contratante;
             $dp = $this->cargo;

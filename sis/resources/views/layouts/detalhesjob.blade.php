@@ -7,8 +7,8 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3>Job - {{$job->nomeJob}}</h3></div>
-                    <div class="panel-body col-md-12">
-                        <div class="col-md-4">
+                    <div class="panel-body">
+                        <div class="col-md-3">
                             <dl>
                                 <dt>Nome do Job</dt>
                                 <dd>{{$job->nomeJob}}</dd>
@@ -32,16 +32,27 @@
                                 <dd>{{$ds[$job->status]}}</dd>
                             </dl>
                         </div>
-                        <div class="col-md-4 ">
+                        <div class="col-md-6 ">
                             <p>Vagas do Job</p>
                             <table class="table">
-                                <tr><th>Qtd</th><th>Cargo</th><th>Valor</th><th>Custo</th></tr>
-                               <?php
+                                <tr><th>Qtd</th><th>Descrição</th><th>Cargo</th><th>Valor</th><th>Custo</th></tr>
+                                <?php
                                 $custototal = null;
                                 $valortotal = null;
-                                 ?>
+                                $custoextra = null;
+                                ?>
                                 @forelse($vj as $v)
-                                    <tr><td>{{$v->quantidade}}</td><td>{{$dp[$v->cargo]}}</td><td>{{$v->valor}}</td><td>{{$v->custo}}</td></tr>
+                                    <tr class="active"><td>{{$v->quantidade}}</td><td>Descrição</td><td>{{$dp[$v->cargo]}}</td><td>{{$v->valor}}</td><td>{{$v->custo}}</td></tr>
+                                    @forelse($v->extras as $e)
+                                    <!--
+                                    Troca parametro tipo por um relacionamento
+                                    -->
+                                        <tr><td></td><td class="info">{{$e->quantidade." ".$tipo[$e->tipo]}}</td><td class="info"></td><td class="info">{{$e->valor}}</td><td class="info">{{$e->quantidade*$e->custo}}</td></tr>
+                                        <?php
+                                            $custoextra += $e->quantidade*$e->custo*$v->quantidade
+                                        ?>
+                                    @empty
+                                    @endforelse
                                     <?php
                                     $custototal += $v->quantidade*$v->custo;
                                     $valortotal += $v->quantidade*$v->valor;
@@ -51,13 +62,14 @@
                                 @endforelse
                             </table>
                             @if($custototal && $valortotal)
-                            <p class="bg-warning" style="padding: 10px; text-align: right">Contrações Custo total: <strong>{{$custototal}}</strong></p>
-                            <p class="bg-primary" style="padding: 10px; text-align: right">Contrações Valor total: <strong>{{$valortotal}}</strong></p>
+                                <p class="bg-warning" style="padding: 10px; text-align: right">{{$custoextra?"Extras Custo total:": "Sem custo Extra" }}<strong>{{$custoextra}}</strong></p>
+                                <p class="bg-warning" style="padding: 10px; text-align: right">Contrações Custo total: <strong>{{$custototal+$custoextra}}</strong></p>
+                                <p class="bg-primary" style="padding: 10px; text-align: right">Contrações Valor total: <strong>{{$valortotal}}</strong></p>
                             @endif
                         </div>
-                        <div class="col-md-4 clearfix">
+                        <div class="col-md-3 clearfix">
                             <p class="bg-success" style="padding: 10px; text-align: right">Valor global: <strong>R$ {{$job->valor}}</strong></p>
-                        @if($custototal > $job->valor)
+                            @if($custototal > $job->valor)
                                 <p class="bg-danger" style="padding: 10px; text-align: right">Atenção prejuizo em <strong>R$ {{$custototal-$job->valor }}</strong></p>
                             @else
                                 <p class="bg-info" style="padding: 10px; text-align: right">Saldo: <strong>R$ {{$job->valor-$custototal}}</strong></p>
@@ -72,10 +84,6 @@
                             <a href="{{url()->current()}}/o"><button class="btn btn-warning ">Gerar Orçamento</button></a>
                             <button class="btn btn-primary ">Conta</button>
                         </div>
-                        <div>
-                            {{$vagas}}
-                        </div>
-
                     </div>
                 </div>
             </div>

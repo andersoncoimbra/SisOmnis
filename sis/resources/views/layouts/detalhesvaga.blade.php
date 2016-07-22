@@ -7,8 +7,6 @@
             <div class="col-md-10 col-lg-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3>Detalhes de vagas do job - {{$job->nomeJob}}</h3></div>
-
-
                     <div class="panel-body" style="padding-right: 5px; padding-left: 5px;">
                         <div class="col-md-5">
                             <dl class="dl-horizontal">
@@ -54,7 +52,6 @@
                                     @empty
                                         <p>Sem tipos de ajuda</p>
                                     @endforelse
-
                                 </select>
                             </div>
                             <div class="col-lg-2">
