@@ -11,8 +11,8 @@
         {!! Form::label('parceiro', 'Selecione o parceiro', array('class' => 'col-sm-2 control-label')) !!}
         <div class="col-sm-4">
             <select name="parceiro" class="form-control selectpicker" style="margin: 3px;">
-                @forelse($dp as $key => $value)
-                    <option value="{{$key}}">{{$value}}</option>
+                @forelse($parceiros as $parceiro)
+                    <option value="{{$parceiro->id}}">{{$parceiro->nome}}</option>
                 @empty
                    <option value="0" >Serm Parceiro</option>
                 @endforelse

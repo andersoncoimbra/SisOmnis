@@ -14,4 +14,9 @@ class Job extends Model
     {
         return $this->hasMany(VagasJob::class, 'id_job');
     }
+
+    public function parceiros()
+    {
+        return $this->belongsTo(Parceiro::class, 'parceiro');
+    }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChaveEstrangeiraVagaJob extends Migration
+class ChaveEstarngeiraParceiroEmJob extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,10 @@ class ChaveEstrangeiraVagaJob extends Migration
      */
     public function up()
     {
-        Schema::table('vagas_jobs', function (Blueprint $table) {
+        Schema::table('jobs', function (Blueprint $table) {
             //
-            $table->foreign('id_job')->references('id')->on('jobs')->onDelete('cascade');
+            $table->foreign('parceiro')->references('id')->on('parceiros');
+
         });
     }
 
@@ -25,10 +26,10 @@ class ChaveEstrangeiraVagaJob extends Migration
      */
     public function down()
     {
-        Schema::table('vagas_jobs', function (Blueprint $table)
-        {
-            $table->dropForeign('vagas_jobs_id_job_foreign');
+        Schema::table('jobs', function (Blueprint $table) {
+            //
+            $table->dropForeign('jobs_parceiro_foreign');
+
         });
     }
 }
-

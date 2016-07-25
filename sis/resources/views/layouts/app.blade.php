@@ -51,7 +51,7 @@
                     @if(Auth::check())
                         <li><a href="{{ url('/home') }}">Painel</a></li>
                         <li><a href="{{url('/jobs')}}">Jobs</a></li>
-                        <li><a href="#">Cadastros</a></li>
+                        <li><a href="{{route('cadastros')}}">Cadastros</a></li>
                         <li><a href="#">Financeiro</a></li>
                         <li><a href="#">Configurações</a></li>
 
@@ -96,6 +96,7 @@
             tela_impressao.window.close();}
     </script>
 
+    @yield('script')
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

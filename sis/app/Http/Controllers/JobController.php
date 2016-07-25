@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ExtrasVagasJob;
 use App\Job;
+use App\Parceiro;
 use App\VagasJob;
 use Illuminate\Http\Request;
 
@@ -29,12 +30,13 @@ class JobController extends Controller
     public function index()
     {
         $jobs   = Job::orderBy('id','DESC')->get();
+        $parceiros = Parceiro::all();
         $ds     = $this->status;
         $dp     = $this->parceiro;
         $p      = $this->praca;
 
 
-        return view('jobs', ['jobs'=> $jobs, 'ds'=> $ds, 'dp'=>$dp, 'p'=>$p]);
+        return view('jobs', ['jobs'=> $jobs, 'ds'=> $ds, 'parceiros'=>$parceiros, 'p'=>$p]);
     }
 
     public function post(Request $request)

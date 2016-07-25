@@ -20,6 +20,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+//Rotas para os Jobs
 Route::group(['prefix'=>'jobs'], function () {
     Route::get('/', 'JobController@index');
     Route::post('/', 'JobController@post');
@@ -33,6 +34,16 @@ Route::group(['prefix'=>'jobs'], function () {
 
     //Gera orçamento
     Route::get('/{id}/o','JobController@orcamento');
+});
+
+//Rotas para os cadastros
+Route::group(['prefix'=>'cadastros'], function (){
+    Route::get('/', ['uses'=>'CadastroController@getIndex', 'as'=>'cadastros']);
+
+    Route::get('/parceiros', function (){return redirect()->route('cadastros');});
+    Route::post('/parceiros', ['uses'=> 'CadastroController@addParceiro', 'as'=>'cadastro.parceiro']);
+
+    Route::get('/candidatos', ['uses'=> 'CadastroController@cadidatos', 'as'=>'cadastro.candidatos']);
 });
 
 
